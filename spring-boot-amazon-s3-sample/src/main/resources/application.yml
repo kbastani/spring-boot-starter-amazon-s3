@@ -1,0 +1,27 @@
+spring.profiles.active: development
+---
+spring:
+  profiles: cloud
+  application:
+    name: ${vcap.application.name:s3-sample-app}
+amazon:
+  aws:
+    access-key-id: ${vcap.services.s3-sample-service.credentials.accessKeyId:access-key-id}
+    access-key-secret: ${vcap.services.s3-sample-service.credentials.secretAccessKey:access-key-secret}
+  s3:
+    default-bucket: ${vcap.services.s3-sample-service.credentials.userName:default-bucket}
+multipart.maxFileSize: 5MB
+multipart.maxRequestSize: 5MB
+---
+spring:
+  profiles: development
+  application:
+    name: s3-sample-app
+amazon:
+  aws:
+    access-key-id: replace
+    access-key-secret: replace
+  s3:
+    default-bucket: replace
+multipart.maxFileSize: 5MB
+multipart.maxRequestSize: 5MB
